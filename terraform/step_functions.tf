@@ -8,9 +8,9 @@ resource "aws_sfn_state_machine" "payment_flow" {
     States = {
       # Step 1: Input Validation
       ValidateTransaction = {
-        Type       = "Task"
-        Resource   = aws_lambda_function.validate_transaction.arn
-        Next       = "AnalyzeRisk"
+        Type     = "Task"
+        Resource = aws_lambda_function.validate_transaction.arn
+        Next     = "AnalyzeRisk"
         Catch = [
           {
             ErrorEquals = ["States.ALL"]
@@ -21,9 +21,9 @@ resource "aws_sfn_state_machine" "payment_flow" {
 
       # Step 2: Bedrock AI Fraud Risk Scoring
       AnalyzeRisk = {
-        Type       = "Task"
-        Resource   = aws_lambda_function.analyze_risk.arn
-        Next       = "EvaluateRiskStatus"
+        Type     = "Task"
+        Resource = aws_lambda_function.analyze_risk.arn
+        Next     = "EvaluateRiskStatus"
         Catch = [
           {
             ErrorEquals = ["States.ALL"]
@@ -88,15 +88,15 @@ resource "aws_sfn_state_machine" "payment_flow" {
         Type     = "Task"
         Resource = aws_lambda_function.generate_receipt.arn
         Parameters = {
-          "transactionId.$"      = "$.transactionId"
-          "merchantId.$"         = "$.merchantId"
-          "amount.$"             = "$.amount"
-          "currency.$"           = "$.currency"
-          "cardLast4.$"          = "$.cardLast4"
-          "processorStatus.$"    = "$.processorResult.processorStatus"
-          "riskScore.$"          = "$.riskScore"
-          "gatewayReference.$"   = "$.processorResult.gatewayReference"
-          "processedAt.$"        = "$.processorResult.processedAt"
+          "transactionId.$"    = "$.transactionId"
+          "merchantId.$"       = "$.merchantId"
+          "amount.$"           = "$.amount"
+          "currency.$"         = "$.currency"
+          "cardLast4.$"        = "$.cardLast4"
+          "processorStatus.$"  = "$.processorResult.processorStatus"
+          "riskScore.$"        = "$.riskScore"
+          "gatewayReference.$" = "$.processorResult.gatewayReference"
+          "processedAt.$"      = "$.processorResult.processedAt"
         }
         Next = "NotifyMerchantSuccess"
         Catch = [
@@ -131,7 +131,7 @@ resource "aws_sfn_state_machine" "payment_flow" {
 
       # Generic Error State
       HandleFailure = {
-        Type = "Fail"
+        Type  = "Fail"
         Error = "PaymentOrchestrationError"
         Cause = "An unhandled execution exception occurred in the payment processing chain."
       }

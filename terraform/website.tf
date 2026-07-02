@@ -77,8 +77,8 @@ resource "aws_cloudfront_distribution" "website_cdn" {
     }
 
     min_ttl     = 0
-    default_ttl = 3600   # 1 hour
-    max_ttl     = 86400  # 24 hours
+    default_ttl = 3600  # 1 hour
+    max_ttl     = 86400 # 24 hours
   }
 
   # SPA Fallback: Route all 404/403 errors back to index.html for React Router

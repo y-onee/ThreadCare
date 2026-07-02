@@ -60,9 +60,9 @@ resource "aws_api_gateway_integration_response" "charge_integration_response" {
   # Respond with execution metadata back to the client
   response_templates = {
     "application/json" = jsonencode({
-      status         = "PROCESSING"
-      executionArn   = "$input.path('$.executionArn')"
-      startDate      = "$input.path('$.startDate')"
+      status       = "PROCESSING"
+      executionArn = "$input.path('$.executionArn')"
+      startDate    = "$input.path('$.startDate')"
     })
   }
 

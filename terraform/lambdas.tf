@@ -87,8 +87,8 @@ resource "aws_lambda_function" "generate_receipt" {
 
   environment {
     variables = {
-      RECEIPTS_BUCKET_NAME      = aws_s3_bucket.receipts.id
-      TRANSACTIONS_TABLE_NAME   = aws_dynamodb_table.transactions.name
+      RECEIPTS_BUCKET_NAME    = aws_s3_bucket.receipts.id
+      TRANSACTIONS_TABLE_NAME = aws_dynamodb_table.transactions.name
     }
   }
 }

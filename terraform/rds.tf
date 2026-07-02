@@ -63,17 +63,17 @@ resource "aws_security_group" "rds_sg" {
 
 # RDS Aurora Serverless v2 PostgreSQL DB Cluster
 resource "aws_rds_cluster" "aurora" {
-  cluster_identifier      = "${var.project_name}-db-cluster-${var.environment}"
-  engine                  = "aurora-postgresql"
-  engine_mode             = "provisioned"
-  engine_version          = "15.4"
-  database_name           = "safepayaudit"
-  master_username         = "safepay_admin"
-  master_password         = "SuperSecurePassword123!" # In real prod, retrieve from Secrets Manager
-  db_subnet_group_name    = aws_db_subnet_group.aurora_subnet_group.name
-  vpc_security_group_ids  = [aws_security_group.rds_sg.id]
-  skip_final_snapshot     = true
-  deletion_protection     = false
+  cluster_identifier     = "${var.project_name}-db-cluster-${var.environment}"
+  engine                 = "aurora-postgresql"
+  engine_mode            = "provisioned"
+  engine_version         = "15.4"
+  database_name          = "safepayaudit"
+  master_username        = "safepay_admin"
+  master_password        = "SuperSecurePassword123!" # In real prod, retrieve from Secrets Manager
+  db_subnet_group_name   = aws_db_subnet_group.aurora_subnet_group.name
+  vpc_security_group_ids = [aws_security_group.rds_sg.id]
+  skip_final_snapshot    = true
+  deletion_protection    = false
 
   serverless_v2_scaling_configuration {
     max_capacity = 2.0
