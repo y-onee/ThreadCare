@@ -14,7 +14,7 @@ export default function App() {
   const [products, setProducts] = useState(CATALOG);
   const [cart, setCart] = useState([]);
   const [view, setView] = useState('store/front'); // store/front, store/cart, portal
-  const [apiEndpoint, setApiEndpoint] = useState('');
+  const [apiEndpoint, setApiEndpoint] = useState('https://cq4nugmim3.execute-api.us-east-1.amazonaws.com/production');
   const [isConfiguringEndpoint, setIsConfiguringEndpoint] = useState(false);
 
   // Form checkout fields

@@ -1,0 +1,1565 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.2",
+  "serial": 41,
+  "lineage": "d3c7c590-2a6b-a470-48fc-e298ab296dad",
+  "outputs": {
+    "apigateway_base_url": {
+      "value": "https://cq4nugmim3.execute-api.us-east-1.amazonaws.com/production",
+      "type": "string"
+    },
+    "cloudfront_website_url": {
+      "value": null,
+      "type": "string"
+    },
+    "rds_instance_endpoint": {
+      "value": null,
+      "type": "string"
+    },
+    "receipts_bucket_name": {
+      "value": "safepay-receipts-production",
+      "type": "string"
+    },
+    "sns_topic_arn": {
+      "value": "arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production",
+      "type": "string"
+    },
+    "step_function_arn": {
+      "value": null,
+      "type": "string"
+    },
+    "transactions_table_name": {
+      "value": "safepay-transactions-production",
+      "type": "string"
+    },
+    "website_s3_bucket": {
+      "value": "safepay-website-production",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "analyze_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "1112344b0c4bbb8b00484dd827469b90fad48564",
+            "output_base64sha256": "J9UefcuxI7gjYOxYdp+V3Xhueob/jmfLx0/FChOyh2M=",
+            "output_base64sha512": "uVpBaCAtk2Ynh7DDUdkWFUwk/v4me+NJ2RYiPFooNDvvNLYLxEK9vmpTJxdBXoD+X4U9n8nelHH/gADeawknrw==",
+            "output_file_mode": null,
+            "output_md5": "df6fd3a4cd952fd380b1f0bd0f2bd54f",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/analyze_risk.zip",
+            "output_sha": "1112344b0c4bbb8b00484dd827469b90fad48564",
+            "output_sha256": "27d51e7dcbb123b82360ec58769f95dd786e7a86ff8e67cbc74fc50a13b28763",
+            "output_sha512": "b95a4168202d93662787b0c351d916154c24fefe267be349d916223c5a28343bef34b60bc442bdbe6a532717415e80fe5f853d9fc9de9471ff8000de6b0927af",
+            "output_size": 1699,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/analyze_risk.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "list_products_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "0715d27a56affd7ba3b74252bd72c6558f340dd1",
+            "output_base64sha256": "3yoxyfExH+rMkHh9NhrtoBvh4wzV3n8CxVR/5UkBQ14=",
+            "output_base64sha512": "WbfNvbZISLO81f71IjblLCz4I3Kx/e6G1lxQwWaO6f0/wbBSX+9Qs9MdXyJdzMZeVZCWDQreTfesjpyjDsi/iA==",
+            "output_file_mode": null,
+            "output_md5": "408afda409cb9f351087881f30c22b16",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/list_products.zip",
+            "output_sha": "0715d27a56affd7ba3b74252bd72c6558f340dd1",
+            "output_sha256": "df2a31c9f1311feacc90787d361aeda01be1e30cd5de7f02c5547fe54901435e",
+            "output_sha512": "59b7cdbdb64848b3bcd5fef52236e52c2cf82372b1fdee86d65c50c1668ee9fd3fc1b0525fef50b3d31d5f225dccc65e5590960d0ade4df7ac8e9ca30ec8bf88",
+            "output_size": 1469,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/list_products.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "list_transactions_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "4cff46bca3153995459a35f3731fc3bc4d5b0b51",
+            "output_base64sha256": "BFuqt8Q5gBOnmSIRGsHMkZOCO1iGmE24mZmu7ZKsPi0=",
+            "output_base64sha512": "bAK8NBrtK41bFxd+OB24sIS6oW5hQ4GXEsXT4YuOei/Tl9HqeELkIcIPhLUGFiEjUaEeqghScgF929ecCpsPFQ==",
+            "output_file_mode": null,
+            "output_md5": "15cd84d95e406cd201e94c0493147936",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/list_transactions.zip",
+            "output_sha": "4cff46bca3153995459a35f3731fc3bc4d5b0b51",
+            "output_sha256": "045baab7c4398013a79922111ac1cc9193823b5886984db89999aeed92ac3e2d",
+            "output_sha512": "6c02bc341aed2b8d5b17177e381db8b084baa16e6143819712c5d3e18b8e7a2fd397d1ea7842e421c20f84b50616212351a11eaa085272017ddbd79c0a9b0f15",
+            "output_size": 894,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/list_transactions.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "notify_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "0390d11e98ac0953a373aaed3832bece1711f822",
+            "output_base64sha256": "vppjae5BEBMklAR7kuv0jr8OwkPel+aMu5V6H9SPHTo=",
+            "output_base64sha512": "terDmesnzJa1/4yQk9Pzch9pIY7kQfy3RyjMoN3DYi7rh7s18556hGWKbJTicFTQnGVopMLGXdhVSeo/NaI+gw==",
+            "output_file_mode": null,
+            "output_md5": "b7e265da0f94aa71dc484e6a2c7000da",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/notify_merchant.zip",
+            "output_sha": "0390d11e98ac0953a373aaed3832bece1711f822",
+            "output_sha256": "be9a6369ee4110132494047b92ebf48ebf0ec243de97e68cbb957a1fd48f1d3a",
+            "output_sha512": "b5eac399eb27cc96b5ff8c9093d3f3721f69218ee441fcb74728cca0ddc3622eeb87bb35f39e7a84658a6c94e27054d09c6568a4c2c65dd85549ea3f35a23e83",
+            "output_size": 934,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/notify_merchant.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "process_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "147175057d7b4921641c4f9c61a2001247ad2349",
+            "output_base64sha256": "WxRz9aBZvhU31pjYOEuuatmXnUPodxqEucV8+QhEEqE=",
+            "output_base64sha512": "k22F8hSN7mg1Bo+4snEaI56ceOiC5zMOcoD6l13utFSe9t9OIXVZem3G4zW4GC2u4iSqFq/2L2pXMxCx8beEHQ==",
+            "output_file_mode": null,
+            "output_md5": "dfcd057b94a783d865784c996338b60f",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/process_card.zip",
+            "output_sha": "147175057d7b4921641c4f9c61a2001247ad2349",
+            "output_sha256": "5b1473f5a059be1537d698d8384bae6ad9979d43e8771a84b9c57cf9084412a1",
+            "output_sha512": "936d85f2148dee6835068fb8b2711a239e9c78e882e7330e7280fa975deeb4549ef6df4e2175597a6dc6e335b8182daee224aa16aff62f6a573310b1f1b7841d",
+            "output_size": 828,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/process_card.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "receipt_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "539145d74e1fcfd8481bfdc691fbdc7b87a1840c",
+            "output_base64sha256": "AIs/0wlWYzp3IVqG6sn1OV3YWpLG7FltuUrE25EuK/M=",
+            "output_base64sha512": "YAfVIT2jh6csIOV/k4AZDAr8rYYQnwGOCBMKp2lvzL30HW6mjdhM2Ij96zcbVI9ghKwkDH8Wm1h5ZlusDCwI3w==",
+            "output_file_mode": null,
+            "output_md5": "7f7a21254be9868dabaeaeb021cbf7fe",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/generate_receipt.zip",
+            "output_sha": "539145d74e1fcfd8481bfdc691fbdc7b87a1840c",
+            "output_sha256": "008b3fd30956633a77215a86eac9f5395dd85a92c6ec596db94ac4db912e2bf3",
+            "output_sha512": "6007d5213da387a72c20e57f9380190c0afcad86109f018e08130aa7696fccbdf41d6ea68dd84cd888fdeb371b548f6084ac240c7f169b5879665bac0c2c08df",
+            "output_size": 1419,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/generate_receipt.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "archive_file",
+      "name": "validate_zip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/archive\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "exclude_symlink_directories": null,
+            "excludes": null,
+            "id": "fd88420ad4c1e0040cf3c9569a41ee19d3f4f015",
+            "output_base64sha256": "Cof/4UlUQygNkxzPIWELBWy69XD35/ij5qRvhB1l2wA=",
+            "output_base64sha512": "2Fq3w33jIbJqa+V3POw5W+qtazUMb2Ikw9hQZVspH5QD3ihjtOqYNSsbbugMmA7zYTB7zoSw2wllWkH3+vs6SQ==",
+            "output_file_mode": null,
+            "output_md5": "ce361305b12af7234edef8c0db8ff272",
+            "output_path": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/files/validate_transaction.zip",
+            "output_sha": "fd88420ad4c1e0040cf3c9569a41ee19d3f4f015",
+            "output_sha256": "0a87ffe1495443280d931ccf21610b056cbaf570f7e7f8a3e6a46f841d65db00",
+            "output_sha512": "d85ab7c37de321b26a6be5773cec395beaad6b350c6f6224c3d850655b291f9403de2863b4ea98352b1b6ee80c980ef361307bce84b0db09655a41f7fafb3a49",
+            "output_size": 1076,
+            "source": [],
+            "source_content": null,
+            "source_content_filename": null,
+            "source_dir": null,
+            "source_file": "/Users/saayoneedhepe/Documents/Dalhousie/Term 3/Cloud/terraform/../src/lambdas/validate_transaction.js",
+            "type": "zip"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method",
+      "name": "charge_post",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_required": false,
+            "authorization": "NONE",
+            "authorization_scopes": null,
+            "authorizer_id": null,
+            "http_method": "POST",
+            "id": "agm-cq4nugmim3-dh2cg1-POST",
+            "operation_name": null,
+            "request_models": null,
+            "request_parameters": null,
+            "request_validator_id": null,
+            "resource_id": "dh2cg1",
+            "rest_api_id": "cq4nugmim3"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_resource.charge",
+            "aws_api_gateway_rest_api.safepay_api"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method",
+      "name": "products_get",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_required": false,
+            "authorization": "NONE",
+            "authorization_scopes": null,
+            "authorizer_id": null,
+            "http_method": "GET",
+            "id": "agm-cq4nugmim3-f9i7vu-GET",
+            "operation_name": null,
+            "request_models": null,
+            "request_parameters": null,
+            "request_validator_id": null,
+            "resource_id": "f9i7vu",
+            "rest_api_id": "cq4nugmim3"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_resource.products",
+            "aws_api_gateway_rest_api.safepay_api"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method",
+      "name": "transactions_get",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_required": false,
+            "authorization": "NONE",
+            "authorization_scopes": null,
+            "authorizer_id": null,
+            "http_method": "GET",
+            "id": "agm-cq4nugmim3-aydox2-GET",
+            "operation_name": null,
+            "request_models": null,
+            "request_parameters": null,
+            "request_validator_id": null,
+            "resource_id": "aydox2",
+            "rest_api_id": "cq4nugmim3"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_resource.transactions",
+            "aws_api_gateway_rest_api.safepay_api"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_method_response",
+      "name": "charge_200",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "http_method": "POST",
+            "id": "agmr-cq4nugmim3-dh2cg1-POST-200",
+            "resource_id": "dh2cg1",
+            "response_models": {
+              "application/json": "Empty"
+            },
+            "response_parameters": null,
+            "rest_api_id": "cq4nugmim3",
+            "status_code": "200"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_method.charge_post",
+            "aws_api_gateway_resource.charge",
+            "aws_api_gateway_rest_api.safepay_api"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_resource",
+      "name": "charge",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "dh2cg1",
+            "parent_id": "3j2hp8vn4m",
+            "path": "/charge",
+            "path_part": "charge",
+            "rest_api_id": "cq4nugmim3"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_rest_api.safepay_api"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_resource",
+      "name": "products",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "f9i7vu",
+            "parent_id": "3j2hp8vn4m",
+            "path": "/products",
+            "path_part": "products",
+            "rest_api_id": "cq4nugmim3"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_rest_api.safepay_api"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_resource",
+      "name": "transactions",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "aydox2",
+            "parent_id": "3j2hp8vn4m",
+            "path": "/transactions",
+            "path_part": "transactions",
+            "rest_api_id": "cq4nugmim3"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_api_gateway_rest_api.safepay_api"
+          ],
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_api_gateway_rest_api",
+      "name": "safepay_api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "api_key_source": "HEADER",
+            "arn": "arn:aws:apigateway:us-east-1::/restapis/cq4nugmim3",
+            "binary_media_types": [],
+            "body": null,
+            "created_date": "2026-07-02T17:05:52Z",
+            "description": "SafePay REST API Gateway",
+            "disable_execute_api_endpoint": false,
+            "endpoint_configuration": [
+              {
+                "ip_address_type": "ipv4",
+                "types": [
+                  "REGIONAL"
+                ],
+                "vpc_endpoint_ids": []
+              }
+            ],
+            "execution_arn": "arn:aws:execute-api:us-east-1:911526870869:cq4nugmim3",
+            "fail_on_warnings": null,
+            "id": "cq4nugmim3",
+            "minimum_compression_size": "",
+            "name": "safepay-api-production",
+            "parameters": null,
+            "policy": "",
+            "put_rest_api_mode": null,
+            "root_resource_id": "3j2hp8vn4m",
+            "tags": null,
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "sfn_log_group",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:us-east-1:911526870869:log-group:/aws/vendedlogs/states/safepay-payment-flow-production",
+            "id": "/aws/vendedlogs/states/safepay-payment-flow-production",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/vendedlogs/states/safepay-payment-flow-production",
+            "name_prefix": "",
+            "retention_in_days": 30,
+            "skip_destroy": false,
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_db_subnet_group",
+      "name": "aurora_subnet_group",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:rds:us-east-1:911526870869:subgrp:safepay-db-subnet-group-production",
+            "description": "Managed by Terraform",
+            "id": "safepay-db-subnet-group-production",
+            "name": "safepay-db-subnet-group-production",
+            "name_prefix": "",
+            "subnet_ids": [
+              "subnet-0703d3d09c6ab72b6",
+              "subnet-0740dde86ff70a479"
+            ],
+            "supported_network_types": [
+              "IPV4"
+            ],
+            "tags": {
+              "Name": "SafePay DB Subnet Group"
+            },
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Name": "SafePay DB Subnet Group",
+              "Project": "safepay"
+            },
+            "vpc_id": "vpc-0dc2d5d3f142d0302"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_subnet.private_a",
+            "aws_subnet.private_b",
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_dynamodb_table",
+      "name": "products",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:dynamodb:us-east-1:911526870869:table/safepay-products-production",
+            "attribute": [
+              {
+                "name": "category",
+                "type": "S"
+              },
+              {
+                "name": "id",
+                "type": "S"
+              }
+            ],
+            "billing_mode": "PAY_PER_REQUEST",
+            "deletion_protection_enabled": false,
+            "global_secondary_index": [
+              {
+                "hash_key": "category",
+                "name": "CategoryIndex",
+                "non_key_attributes": [],
+                "on_demand_throughput": [],
+                "projection_type": "ALL",
+                "range_key": "",
+                "read_capacity": 0,
+                "write_capacity": 0
+              }
+            ],
+            "hash_key": "id",
+            "id": "safepay-products-production",
+            "import_table": [],
+            "local_secondary_index": [],
+            "name": "safepay-products-production",
+            "on_demand_throughput": [],
+            "point_in_time_recovery": [
+              {
+                "enabled": false,
+                "recovery_period_in_days": 0
+              }
+            ],
+            "range_key": null,
+            "read_capacity": 0,
+            "replica": [],
+            "restore_date_time": null,
+            "restore_source_name": null,
+            "restore_source_table_arn": null,
+            "restore_to_latest_time": null,
+            "server_side_encryption": [
+              {
+                "enabled": true,
+                "kms_key_arn": ""
+              }
+            ],
+            "stream_arn": "",
+            "stream_enabled": false,
+            "stream_label": "",
+            "stream_view_type": "",
+            "table_class": "STANDARD",
+            "tags": {
+              "Name": "safepay-products-table"
+            },
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Name": "safepay-products-table",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "ttl": [
+              {
+                "attribute_name": "",
+                "enabled": false
+              }
+            ],
+            "write_capacity": 0
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_dynamodb_table",
+      "name": "transactions",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:dynamodb:us-east-1:911526870869:table/safepay-transactions-production",
+            "attribute": [
+              {
+                "name": "merchantId",
+                "type": "S"
+              },
+              {
+                "name": "transactionId",
+                "type": "S"
+              }
+            ],
+            "billing_mode": "PAY_PER_REQUEST",
+            "deletion_protection_enabled": false,
+            "global_secondary_index": [
+              {
+                "hash_key": "merchantId",
+                "name": "MerchantIndex",
+                "non_key_attributes": [],
+                "on_demand_throughput": [],
+                "projection_type": "ALL",
+                "range_key": "",
+                "read_capacity": 0,
+                "write_capacity": 0
+              }
+            ],
+            "hash_key": "transactionId",
+            "id": "safepay-transactions-production",
+            "import_table": [],
+            "local_secondary_index": [],
+            "name": "safepay-transactions-production",
+            "on_demand_throughput": [],
+            "point_in_time_recovery": [
+              {
+                "enabled": true,
+                "recovery_period_in_days": 35
+              }
+            ],
+            "range_key": null,
+            "read_capacity": 0,
+            "replica": [],
+            "restore_date_time": null,
+            "restore_source_name": null,
+            "restore_source_table_arn": null,
+            "restore_to_latest_time": null,
+            "server_side_encryption": [
+              {
+                "enabled": true,
+                "kms_key_arn": ""
+              }
+            ],
+            "stream_arn": "",
+            "stream_enabled": false,
+            "stream_label": "",
+            "stream_view_type": "",
+            "table_class": "STANDARD",
+            "tags": {
+              "Name": "safepay-transactions-table"
+            },
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Name": "safepay-transactions-table",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "ttl": [
+              {
+                "attribute_name": "",
+                "enabled": false
+              }
+            ],
+            "write_capacity": 0
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjYwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_policy",
+      "name": "apigw_sfn_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::911526870869:policy/safepay-apigw-sfn-policy-production",
+            "attachment_count": 1,
+            "description": "",
+            "id": "arn:aws:iam::911526870869:policy/safepay-apigw-sfn-policy-production",
+            "name": "safepay-apigw-sfn-policy-production",
+            "name_prefix": "",
+            "path": "/",
+            "policy": "{\"Statement\":[{\"Action\":[\"states:StartExecution\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:states:*:*:stateMachine:safepay-payment-flow-production\"}],\"Version\":\"2012-10-17\"}",
+            "policy_id": "ANPA5IOZ4H5KSHX2N4O6P",
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_policy",
+      "name": "lambda_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::911526870869:policy/safepay-lambda-policy-production",
+            "attachment_count": 1,
+            "description": "Execution policy for SafePay lambdas allowing access to S3, DynamoDB, Bedrock, and SNS",
+            "id": "arn:aws:iam::911526870869:policy/safepay-lambda-policy-production",
+            "name": "safepay-lambda-policy-production",
+            "name_prefix": "",
+            "path": "/",
+            "policy": "{\"Statement\":[{\"Action\":[\"logs:CreateLogGroup\",\"logs:CreateLogStream\",\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:logs:*:*:*\"},{\"Action\":[\"xray:PutTraceSegments\",\"xray:PutTelemetryRecords\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"dynamodb:PutItem\",\"dynamodb:GetItem\",\"dynamodb:UpdateItem\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:dynamodb:*:*:table/safepay-transactions-production\"},{\"Action\":[\"s3:PutObject\",\"s3:GetObject\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:s3:::safepay-receipts-production/*\"},{\"Action\":[\"sns:Publish\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:sns:*:*:*\"},{\"Action\":[\"bedrock:InvokeModel\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:bedrock:*:*:model/anthropic.claude-*\"}],\"Version\":\"2012-10-17\"}",
+            "policy_id": "ANPA5IOZ4H5KQ5MOCC5OZ",
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_policy",
+      "name": "sfn_policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::911526870869:policy/safepay-sfn-policy-production",
+            "attachment_count": 1,
+            "description": "",
+            "id": "arn:aws:iam::911526870869:policy/safepay-sfn-policy-production",
+            "name": "safepay-sfn-policy-production",
+            "name_prefix": "",
+            "path": "/",
+            "policy": "{\"Statement\":[{\"Action\":[\"lambda:InvokeFunction\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:lambda:*:*:function:safepay-*\"},{\"Action\":[\"xray:PutTraceSegments\",\"xray:PutTelemetryRecords\",\"xray:GetSamplingRules\",\"xray:GetSamplingTargets\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"logs:CreateLogDelivery\",\"logs:GetLogDelivery\",\"logs:UpdateLogDelivery\",\"logs:DeleteLogDelivery\",\"logs:ListLogDeliveries\",\"logs:PutLogEvents\",\"logs:PutResourcePolicy\",\"logs:DescribeResourcePolicies\",\"logs:DescribeLogGroups\"],\"Effect\":\"Allow\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+            "policy_id": "ANPA5IOZ4H5K4Z2FZQS7N",
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "apigw_sfn_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::911526870869:role/safepay-apigw-sfn-role-production",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-07-02T16:51:47Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "safepay-apigw-sfn-role-production",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::911526870869:policy/safepay-apigw-sfn-policy-production"
+            ],
+            "max_session_duration": 3600,
+            "name": "safepay-apigw-sfn-role-production",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "unique_id": "AROA5IOZ4H5K7SZR4ANS4"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "lambda_exec_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::911526870869:role/safepay-lambda-exec-role-production",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"lambda.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-07-02T16:51:47Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "safepay-lambda-exec-role-production",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::911526870869:policy/safepay-lambda-policy-production"
+            ],
+            "max_session_duration": 3600,
+            "name": "safepay-lambda-exec-role-production",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "unique_id": "AROA5IOZ4H5KZQTPOOH6N"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "sfn_exec_role",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::911526870869:role/safepay-sfn-exec-role-production",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"states.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-07-02T16:51:47Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "safepay-sfn-exec-role-production",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::911526870869:policy/safepay-sfn-policy-production"
+            ],
+            "max_session_duration": 3600,
+            "name": "safepay-sfn-exec-role-production",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "unique_id": "AROA5IOZ4H5KXVRSKWGUB"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjAifQ==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "receipts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::safepay-receipts-production",
+            "bucket": "safepay-receipts-production",
+            "bucket_domain_name": "safepay-receipts-production.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "safepay-receipts-production.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "764c448a42e8525cb9d256e032d3f998d1cf65edd1d995cc91f7a31e11bd01e1",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "safepay-receipts-production",
+            "lifecycle_rule": [
+              {
+                "abort_incomplete_multipart_upload_days": 0,
+                "enabled": true,
+                "expiration": [
+                  {
+                    "date": "",
+                    "days": 365,
+                    "expired_object_delete_marker": false
+                  }
+                ],
+                "id": "archive-receipts",
+                "noncurrent_version_expiration": [],
+                "noncurrent_version_transition": [],
+                "prefix": "",
+                "tags": {},
+                "transition": [
+                  {
+                    "date": "",
+                    "days": 90,
+                    "storage_class": "GLACIER"
+                  }
+                ]
+              }
+            ],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "website",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::safepay-website-production",
+            "bucket": "safepay-website-production",
+            "bucket_domain_name": "safepay-website-production.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "safepay-website-production.s3.us-east-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "764c448a42e8525cb9d256e032d3f998d1cf65edd1d995cc91f7a31e11bd01e1",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3AQBSTGFYJSTF",
+            "id": "safepay-website-production",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::911526870869:distribution/E1TO32KU29SXS5\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::safepay-website-production/*\",\"Sid\":\"AllowCloudFrontServicePrincipal\"}],\"Version\":\"2012-10-17\"}",
+            "region": "us-east-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {},
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_lifecycle_configuration",
+      "name": "receipts_lifecycle",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "bucket": "safepay-receipts-production",
+            "expected_bucket_owner": "",
+            "id": "safepay-receipts-production",
+            "rule": [
+              {
+                "abort_incomplete_multipart_upload": [],
+                "expiration": [
+                  {
+                    "date": null,
+                    "days": 365,
+                    "expired_object_delete_marker": false
+                  }
+                ],
+                "filter": [
+                  {
+                    "and": [],
+                    "object_size_greater_than": null,
+                    "object_size_less_than": null,
+                    "prefix": "",
+                    "tag": []
+                  }
+                ],
+                "id": "archive-receipts",
+                "noncurrent_version_expiration": [],
+                "noncurrent_version_transition": [],
+                "prefix": "",
+                "status": "Enabled",
+                "transition": [
+                  {
+                    "date": null,
+                    "days": 90,
+                    "storage_class": "GLACIER"
+                  }
+                ]
+              }
+            ],
+            "timeouts": null,
+            "transition_default_minimum_object_size": "all_storage_classes_128K"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.receipts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "receipts_block",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "safepay-receipts-production",
+            "id": "safepay-receipts-production",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.receipts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "website_block",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "safepay-website-production",
+            "id": "safepay-website-production",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.website"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "receipts_encryption",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "safepay-receipts-production",
+            "expected_bucket_owner": "",
+            "id": "safepay-receipts-production",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "",
+                    "sse_algorithm": "AES256"
+                  }
+                ],
+                "bucket_key_enabled": null
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.receipts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "rds_sg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:911526870869:security-group/sg-086fa2edc02875b79",
+            "description": "Access to Aurora DB from Lambda functions",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "id": "sg-086fa2edc02875b79",
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "10.0.0.0/16"
+                ],
+                "description": "",
+                "from_port": 5432,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 5432
+              }
+            ],
+            "name": "safepay-rds-sg-production",
+            "name_prefix": "",
+            "owner_id": "911526870869",
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0d6b7c309ef01349f"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6OTAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic",
+      "name": "transaction_events",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application_failure_feedback_role_arn": "",
+            "application_success_feedback_role_arn": "",
+            "application_success_feedback_sample_rate": 0,
+            "archive_policy": "",
+            "arn": "arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production",
+            "beginning_archive_time": "",
+            "content_based_deduplication": false,
+            "delivery_policy": "",
+            "display_name": "",
+            "fifo_throughput_scope": "",
+            "fifo_topic": false,
+            "firehose_failure_feedback_role_arn": "",
+            "firehose_success_feedback_role_arn": "",
+            "firehose_success_feedback_sample_rate": 0,
+            "http_failure_feedback_role_arn": "",
+            "http_success_feedback_role_arn": "",
+            "http_success_feedback_sample_rate": 0,
+            "id": "arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production",
+            "kms_master_key_id": "",
+            "lambda_failure_feedback_role_arn": "",
+            "lambda_success_feedback_role_arn": "",
+            "lambda_success_feedback_sample_rate": 0,
+            "name": "safepay-transaction-events-production",
+            "name_prefix": "",
+            "owner": "911526870869",
+            "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"911526870869\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}",
+            "signature_version": 0,
+            "sqs_failure_feedback_role_arn": "",
+            "sqs_success_feedback_role_arn": "",
+            "sqs_success_feedback_sample_rate": 0,
+            "tags": null,
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Project": "safepay"
+            },
+            "tracing_config": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "create_before_destroy": true
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic_subscription",
+      "name": "email_sub",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production:c223d1f5-42ab-4487-b46b-9e19036a8c43",
+            "confirmation_timeout_in_minutes": 1,
+            "confirmation_was_authenticated": false,
+            "delivery_policy": "",
+            "endpoint": "merchant-alerts@safepay.example.com",
+            "endpoint_auto_confirms": false,
+            "filter_policy": "",
+            "filter_policy_scope": "",
+            "id": "arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production:c223d1f5-42ab-4487-b46b-9e19036a8c43",
+            "owner_id": "911526870869",
+            "pending_confirmation": true,
+            "protocol": "email",
+            "raw_message_delivery": false,
+            "redrive_policy": "",
+            "replay_policy": "",
+            "subscription_role_arn": "",
+            "topic_arn": "arn:aws:sns:us-east-1:911526870869:safepay-transaction-events-production"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_sns_topic.transaction_events"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private_a",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:911526870869:subnet/subnet-0740dde86ff70a479",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az1",
+            "cidr_block": "10.0.1.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0740dde86ff70a479",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "911526870869",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "safepay-private-subnet-a"
+            },
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Name": "safepay-private-subnet-a",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0d6b7c309ef01349f"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "private_b",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:911526870869:subnet/subnet-0703d3d09c6ab72b6",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.2.0/24",
+            "customer_owned_ipv4_pool": "",
+            "enable_dns64": false,
+            "enable_lni_at_device_index": 0,
+            "enable_resource_name_dns_a_record_on_launch": false,
+            "enable_resource_name_dns_aaaa_record_on_launch": false,
+            "id": "subnet-0703d3d09c6ab72b6",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "ipv6_native": false,
+            "map_customer_owned_ip_on_launch": false,
+            "map_public_ip_on_launch": false,
+            "outpost_arn": "",
+            "owner_id": "911526870869",
+            "private_dns_hostname_type_on_launch": "ip-name",
+            "tags": {
+              "Name": "safepay-private-subnet-b"
+            },
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Name": "safepay-private-subnet-b",
+              "Project": "safepay"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-0d6b7c309ef01349f"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "dependencies": [
+            "aws_vpc.main"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:911526870869:vpc/vpc-0d6b7c309ef01349f",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-09ed5863a4ba46a1a",
+            "default_route_table_id": "rtb-0e4d598f4cc5aa834",
+            "default_security_group_id": "sg-0fec041a42a990153",
+            "dhcp_options_id": "dopt-03337e28a09bc2e93",
+            "enable_dns_hostnames": true,
+            "enable_dns_support": true,
+            "enable_network_address_usage_metrics": false,
+            "id": "vpc-0d6b7c309ef01349f",
+            "instance_tenancy": "default",
+            "ipv4_ipam_pool_id": null,
+            "ipv4_netmask_length": null,
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_network_border_group": "",
+            "ipv6_ipam_pool_id": "",
+            "ipv6_netmask_length": 0,
+            "main_route_table_id": "rtb-0e4d598f4cc5aa834",
+            "owner_id": "911526870869",
+            "tags": {
+              "Name": "safepay-vpc"
+            },
+            "tags_all": {
+              "Environment": "production",
+              "ManagedBy": "Terraform",
+              "Name": "safepay-vpc",
+              "Project": "safepay"
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

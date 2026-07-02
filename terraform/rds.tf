@@ -31,7 +31,7 @@ resource "aws_subnet" "private_b" {
 
 # DB Subnet Group
 resource "aws_db_subnet_group" "aurora_subnet_group" {
-  name       = "${var.project_name}-db-subnet-group-${var.environment}"
+  name       = "${var.project_name}-subnet-group-${var.environment}"
   subnet_ids = [aws_subnet.private_a.id, aws_subnet.private_b.id]
 
   tags = {
@@ -39,7 +39,7 @@ resource "aws_db_subnet_group" "aurora_subnet_group" {
   }
 }
 
-# DB Security Group
+
 resource "aws_security_group" "rds_sg" {
   name        = "${var.project_name}-rds-sg-${var.environment}"
   description = "Access to Aurora DB from Lambda functions"
@@ -66,7 +66,7 @@ resource "aws_db_instance" "postgres" {
   allocated_storage      = 20
   max_allocated_storage  = 100
   engine                 = "postgres"
-  engine_version         = "15.4"
+  engine_version         = "15"
   instance_class         = "db.t3.micro" # Free Tier Eligible
   db_name                = "safepayaudit"
   username               = "safepay_admin"

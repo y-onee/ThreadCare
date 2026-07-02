@@ -16,7 +16,7 @@ resource "aws_s3_bucket_public_access_block" "website_block" {
 
 # CloudFront Origin Access Control
 resource "aws_cloudfront_origin_access_control" "website_oac" {
-  name                              = "${var.project_name}-website-oac-${var.environment}"
+  name                              = "${var.project_name}-oac-${var.environment}-unique"
   description                       = "OAC for ThreadCare React website"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
