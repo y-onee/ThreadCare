@@ -61,31 +61,19 @@ resource "aws_security_group" "rds_sg" {
   }
 }
 
-# RDS Aurora Serverless v2 PostgreSQL DB Cluster
-resource "aws_rds_cluster" "aurora" {
-  cluster_identifier     = "${var.project_name}-db-cluster-${var.environment}"
-  engine                 = "aurora-postgresql"
-  engine_mode            = "provisioned"
+# Standard RDS Single-Instance PostgreSQL (Free Tier Eligible)
+resource "aws_db_instance" "postgres" {
+  allocated_storage      = 20
+  max_allocated_storage  = 100
+  engine                 = "postgres"
   engine_version         = "15.4"
-  database_name          = "safepayaudit"
-  master_username        = "safepay_admin"
-  master_password        = "SuperSecurePassword123!" # In real prod, retrieve from Secrets Manager
+  instance_class         = "db.t3.micro" # Free Tier Eligible
+  db_name                = "safepayaudit"
+  username               = "safepay_admin"
+  password               = "SuperSecurePassword123!" # In real prod, retrieve from Secrets Manager
   db_subnet_group_name   = aws_db_subnet_group.aurora_subnet_group.name
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   skip_final_snapshot    = true
-  deletion_protection    = false
-
-  serverlessv2_scaling_configuration {
-    max_capacity = 2.0
-    min_capacity = 0.5
-  }
-}
-
-# DB Instance
-resource "aws_rds_cluster_instance" "aurora_instance" {
-  cluster_identifier = aws_rds_cluster.aurora.id
-  instance_class     = "db.serverless"
-  engine             = aws_rds_cluster.aurora.engine
-  engine_version     = aws_rds_cluster.aurora.engine_version
-  identifier         = "${var.project_name}-db-instance-${var.environment}"
+  publicly_accessible    = false
+  identifier             = "${var.project_name}-db-${var.environment}"
 }

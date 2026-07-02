@@ -18,9 +18,9 @@ output "receipts_bucket_name" {
   value       = aws_s3_bucket.receipts.id
 }
 
-output "aurora_cluster_endpoint" {
-  description = "Aurora Serverless PostgreSQL cluster endpoint"
-  value       = aws_rds_cluster.aurora.endpoint
+output "rds_instance_endpoint" {
+  description = "PostgreSQL DB instance endpoint"
+  value       = aws_db_instance.postgres.endpoint
 }
 
 output "sns_topic_arn" {
