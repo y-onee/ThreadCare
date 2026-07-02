@@ -75,7 +75,7 @@ resource "aws_rds_cluster" "aurora" {
   skip_final_snapshot    = true
   deletion_protection    = false
 
-  serverless_v2_scaling_configuration {
+  serverlessv2_scaling_configuration {
     max_capacity = 2.0
     min_capacity = 0.5
   }

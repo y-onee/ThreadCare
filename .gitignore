@@ -22,3 +22,7 @@ __pycache__/
 # Compiled PDF Reports
 *.pdf
 
+# Local temp terraform binary
+tfbin/
+
+
