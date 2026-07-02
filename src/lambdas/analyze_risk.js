@@ -36,7 +36,7 @@ exports.handler = async (event) => {
     try {
         console.log("Invoking Amazon Bedrock for AI-powered risk assessment...");
         const client = new BedrockRuntimeClient({ region: process.env.AWS_REGION || "us-east-1" });
-        
+
         const prompt = `Human: Evaluate the fraud risk of this transaction:
 - ID: ${transactionId}
 - Amount: $${amount}
@@ -72,8 +72,9 @@ Assistant:`;
         }
     } catch (err) {
         console.warn("Could not reach Amazon Bedrock or parse response. Using fallback heuristics. Error:", err.message);
-        // Add random jitter to rule-based score to simulate live variations
-        riskScore = Math.min(1.0, Math.max(0.0, riskScore + (Math.random() * 0.1 - 0.05)));
+        if (process.env.NODE_ENV !== 'test') {
+            riskScore = Math.min(1.0, Math.max(0.0, riskScore + (Math.random() * 0.1 - 0.05)));
+        }
     }
 
     // Determine final status

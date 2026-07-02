@@ -112,3 +112,55 @@ resource "aws_lambda_function" "notify_merchant" {
     }
   }
 }
+
+data "archive_file" "list_transactions_zip" {
+  type        = "zip"
+  source_file = "${path.module}/../src/lambdas/list_transactions.js"
+  output_path = "${path.module}/files/list_transactions.zip"
+}
+
+data "archive_file" "list_products_zip" {
+  type        = "zip"
+  source_file = "${path.module}/../src/lambdas/list_products.js"
+  output_path = "${path.module}/files/list_products.zip"
+}
+
+resource "aws_lambda_function" "list_transactions" {
+  filename         = data.archive_file.list_transactions_zip.output_path
+  function_name    = "${var.project_name}-list-transactions-${var.environment}"
+  role             = aws_iam_role.lambda_exec_role.arn
+  handler          = "list_transactions.handler"
+  source_code_hash = data.archive_file.list_transactions_zip.output_base64sha256
+  runtime          = "nodejs20.x"
+  timeout          = 15
+
+  tracing_config {
+    mode = "Active"
+  }
+
+  environment {
+    variables = {
+      TRANSACTIONS_TABLE_NAME = aws_dynamodb_table.transactions.name
+    }
+  }
+}
+
+resource "aws_lambda_function" "list_products" {
+  filename         = data.archive_file.list_products_zip.output_path
+  function_name    = "${var.project_name}-list-products-${var.environment}"
+  role             = aws_iam_role.lambda_exec_role.arn
+  handler          = "list_products.handler"
+  source_code_hash = data.archive_file.list_products_zip.output_base64sha256
+  runtime          = "nodejs20.x"
+  timeout          = 15
+
+  tracing_config {
+    mode = "Active"
+  }
+
+  environment {
+    variables = {
+      PRODUCTS_TABLE_NAME = aws_dynamodb_table.products.name
+    }
+  }
+}

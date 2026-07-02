@@ -18,3 +18,7 @@ tfplan
 # Python environment
 __pycache__/
 *.pyc
+
+# Compiled PDF Reports
+*.pdf
+

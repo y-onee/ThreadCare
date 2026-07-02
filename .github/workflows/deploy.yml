@@ -1,4 +1,4 @@
-name: SafePay CI/CD Pipeline
+name: ThreadCare CI/CD Pipeline
 
 on:
   push:
@@ -7,8 +7,9 @@ on:
     branches: [ main ]
 
 jobs:
-  test-and-lint:
-    name: Node.js Unit Testing & Code Verification
+  # ─── Stage 1: Backend Lambda Tests ──────────────────────────────────────────
+  backend-test:
+    name: Lambda Unit Testing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Codebase
@@ -20,16 +21,47 @@ jobs:
           node-version: '20.x'
           cache: 'npm'
 
-      - name: Install Project Dependencies
+      - name: Install Backend Dependencies
         run: npm ci
 
       - name: Execute Lambda Test Suite
         run: npm test
 
+  # ─── Stage 2: React Website Build ───────────────────────────────────────────
+  frontend-build:
+    name: React Website Build
+    runs-on: ubuntu-latest
+    needs: backend-test
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install Website Dependencies
+        run: npm ci
+        working-directory: ./website
+
+      - name: Build React Application (Production Bundle)
+        run: npm run build
+        working-directory: ./website
+
+      - name: Upload dist Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: threadcare-website-dist
+          path: website/dist/
+
+  # ─── Stage 3: Terraform Validation ──────────────────────────────────────────
   terraform-verify:
     name: Terraform Validation & Dry-Run
     runs-on: ubuntu-latest
-    needs: test-and-lint
+    needs: backend-test
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -60,7 +92,47 @@ jobs:
         working-directory: ./terraform
         if: github.event_name == 'pull_request'
 
-      - name: Terraform Resource Deployment (Apply)
-        run: terraform apply -auto-approve -input=false
+  # ─── Stage 4: Deploy (main branch only) ─────────────────────────────────────
+  deploy:
+    name: Deploy Infrastructure & Website
+    runs-on: ubuntu-latest
+    needs: [frontend-build, terraform-verify]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'us-east-1'
+    steps:
+      - name: Checkout Codebase
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.6.0'
+
+      - name: Terraform Apply
+        run: |
+          terraform init
+          terraform apply -auto-approve -input=false
         working-directory: ./terraform
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+      - name: Download Website dist
+        uses: actions/download-artifact@v4
+        with:
+          name: threadcare-website-dist
+          path: website/dist/
+
+      - name: Deploy React App to S3
+        run: |
+          BUCKET=$(terraform -chdir=terraform output -raw website_s3_bucket)
+          aws s3 sync website/dist/ s3://$BUCKET --delete --cache-control "public, max-age=3600"
+          echo "Website deployed to s3://$BUCKET"
+
+      - name: Invalidate CloudFront Cache
+        run: |
+          CF_DIST_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='ThreadCare E-Commerce Storefront CDN'].Id" --output text)
+          if [ -n "$CF_DIST_ID" ]; then
+            aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+            echo "CloudFront cache invalidated for $CF_DIST_ID"
+          fi

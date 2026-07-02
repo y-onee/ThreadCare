@@ -31,10 +31,30 @@ jest.mock("@aws-sdk/lib-dynamodb", () => {
     return {
         DynamoDBDocumentClient: {
             from: jest.fn().mockImplementation(() => ({
-                send: jest.fn().mockResolvedValue({})
+                send: jest.fn().mockImplementation((command) => {
+                    if (command && command.isScan) {
+                        // Scan condition
+                        if (command.TableName && command.TableName.includes("Products")) {
+                            return Promise.resolve({
+                                Items: [
+                                    { id: "prod_1", name: "Jacket", price: 89.99 },
+                                    { id: "prod_2", name: "Shirt", price: 48.50 }
+                                ]
+                            });
+                        }
+                        return Promise.resolve({
+                            Items: [
+                                { transactionId: "tx_1", merchantId: "mch_1", amount: 100, createdAt: "2026-07-02T10:00:00Z" },
+                                { transactionId: "tx_2", merchantId: "mch_2", amount: 200, createdAt: "2026-07-02T11:00:00Z" }
+                            ]
+                        });
+                    }
+                    return Promise.resolve({});
+                })
             }))
         },
-        PutCommand: jest.fn()
+        PutCommand: jest.fn().mockImplementation((input) => ({ isPut: true, ...input })),
+        ScanCommand: jest.fn().mockImplementation((input) => ({ isScan: true, ...input }))
     };
 });
 
@@ -53,6 +73,8 @@ const analyzeRisk = require("../src/lambdas/analyze_risk").handler;
 const processCard = require("../src/lambdas/process_card").handler;
 const generateReceipt = require("../src/lambdas/generate_receipt").handler;
 const notifyMerchant = require("../src/lambdas/notify_merchant").handler;
+const listTransactions = require("../src/lambdas/list_transactions").handler;
+const listProducts = require("../src/lambdas/list_products").handler;
 
 describe("SafePay Lambdas Suite", () => {
 
@@ -127,8 +149,7 @@ describe("SafePay Lambdas Suite", () => {
                 clientIp: "99.99.99.99"
             };
             const result = await analyzeRisk(payload);
-            // rule based: 0.1 (base) + 0.4 (>10k) + 0.3 (>50k) = 0.8
-            expect(result.riskScore).toBeGreaterThanOrEqual(0.7); 
+            expect(result.riskScore).toBeGreaterThanOrEqual(0.8); 
             expect(result.riskStatus).toBe("DENIED_FRAUD");
         });
     });
@@ -202,6 +223,30 @@ describe("SafePay Lambdas Suite", () => {
             const result = await notifyMerchant(payload);
             expect(result.statusCode).toBe(200);
             expect(result.body.message).toBe("Transaction processed and merchant notified.");
+        });
+    });
+
+    describe("6. list_transactions Lambda", () => {
+        it("should successfully fetch and sort transaction items", async () => {
+            const result = await listTransactions({});
+            expect(result.statusCode).toBe(200);
+            
+            const body = JSON.parse(result.body);
+            expect(body.length).toBe(2);
+            // tx_2 should be first since it has a later timestamp (11:00 vs 10:00)
+            expect(body[0].transactionId).toBe("tx_2");
+            expect(body[1].transactionId).toBe("tx_1");
+        });
+    });
+
+    describe("7. list_products Lambda", () => {
+        it("should successfully fetch clothing listings", async () => {
+            const result = await listProducts({});
+            expect(result.statusCode).toBe(200);
+            
+            const body = JSON.parse(result.body);
+            expect(body.length).toBeGreaterThanOrEqual(2);
+            expect(body[0].name).toBe("Jacket");
         });
     });
 });
